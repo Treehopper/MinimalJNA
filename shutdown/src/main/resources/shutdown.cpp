@@ -4,7 +4,7 @@
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "advapi32.lib")
 
-BOOL MySystemShutdown()
+BOOL isShutdownAllowed()
 {
    HANDLE hToken; 
    TOKEN_PRIVILEGES tkp; 
@@ -31,6 +31,14 @@ BOOL MySystemShutdown()
    if (GetLastError() != ERROR_SUCCESS) 
       return FALSE; 
  
+   return TRUE;
+}
+
+BOOL shutdown()
+{
+   if (!isShutdownAllowed()) 
+      return FALSE; 
+ 
    // Shut down the system and force all applications to close. 
  
    if (!ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE, 
@@ -43,10 +51,10 @@ BOOL MySystemShutdown()
    return TRUE;
 }
 
-extern "C" __declspec(dllexport) int winShutdown(void* callback(char*)) {
-        char result[] = "Shutting down...";
-        callback(result);
-        MySystemShutdown();
+extern "C" __declspec(dllexport) bool winShutdown() {
+    return winShutdown();
 }
 
-
+extern "C" __declspec(dllexport) bool isWinShutdownAllowed() {
+    return isShutdownAllowed();
+}
