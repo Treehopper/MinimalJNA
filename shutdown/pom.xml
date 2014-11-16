@@ -34,7 +34,7 @@
                 </descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>eu.hohenegger.shutdown.MyShutdown</mainClass>
+							<mainClass>eu.hohenegger.shutdown.Shutdown</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>

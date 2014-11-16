@@ -1,8 +1,8 @@
 package eu.hohenegger.shutdown;
 
-public class MyShutdown {
+public class Shutdown {
 	public static void main(String[] args) {
-		MyShutdownDll dll = (MyShutdownDll) MyShutdownDll.INSTANCE;
+		ShutdownDll dll = (ShutdownDll) ShutdownDll.INSTANCE;
 		if (!dll.isWinShutdownAllowed()) {
 			System.err.println("shutdown not allowed");
 			System.exit(1);
