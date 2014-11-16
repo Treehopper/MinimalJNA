@@ -7,12 +7,7 @@ import java.nio.file.Files;
 
 public class Shutdown {
 	public static void main(String[] args) {
-		try {
-			extractDll(ShutdownDll.NATIVE_LIB_NAME + ShutdownDll.EXTENSION);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+		extractDll(ShutdownDll.NATIVE_LIB_NAME + ShutdownDll.EXTENSION);
 		
 		ShutdownDll dll = (ShutdownDll) ShutdownDll.INSTANCE;
 		if (!dll.isWinShutdownAllowed()) {
@@ -27,8 +22,17 @@ public class Shutdown {
 		System.exit(0);
 	}
 	
-	public static void extractDll(String name) throws IOException {
-	    InputStream in = Shutdown.class.getResourceAsStream(name);
-	    Files.copy(in, new File(name).getAbsoluteFile().toPath());
+	public static void extractDll(String name)  {
+		try {
+			File file = new File(name);
+			if (!file.exists()) {
+				InputStream in = Shutdown.class.getResourceAsStream(file.getName());
+				Files.copy(in, file.getAbsoluteFile().toPath());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		
 	}
 }

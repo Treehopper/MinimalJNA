@@ -52,7 +52,7 @@ BOOL shutdown()
 }
 
 extern "C" __declspec(dllexport) bool winShutdown() {
-    return winShutdown();
+    return shutdown();
 }
 
 extern "C" __declspec(dllexport) bool isWinShutdownAllowed() {
