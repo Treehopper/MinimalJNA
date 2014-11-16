@@ -1,5 +1,6 @@
-MinimalJNA
+MinimalJNA ![Travis CI](https://travis-ci.org/Treehopper/MinimalJNA.png?branch=master "Build Status")
 ==========
+Uses WinAPI to shut down windows.
 
 Build
 ===================
